@@ -3,6 +3,7 @@ ruby '2.0.0'
 
 gem 'rails', '4.0.0.rc1'
 gem 'bootstrap-sass', '2.3.2.0'
+gem 'bcrypt-ruby', '3.0.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'
@@ -26,8 +27,9 @@ group :doc do
 end
 
 group :production do
-gem 'therubyracer-heroku'
-gem 'pg'
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor', '0.0.2'
+  gem 'therubyracer-heroku'
 end
 
 gem 'execjs'
