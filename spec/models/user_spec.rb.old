@@ -70,17 +70,20 @@ describe User do
     it { should be_invalid }
   end
 
-describe User do    
-  describe "#authenticate" do
-    let(:user) { User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar") }
+  describe "return value of authenticate method" do
+    before { @user.save }
+    let(:found_user) { User.find_by(email: @user.email) }
 
-    it "has a valid password" do
-      user.authenticate("foobar").should be_true
+    describe "with valid password" do
+      it { should == found_user.authenticate(@user.password) }
     end
 
-    it "has invalid password" do
-      user.authenticate("invalid").should be_false
+    describe "with invalid password" do
+      before { @user.save }
+      let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+
+      it { should_not == user_for_invalid_password }
+      specify { expect(user_for_invalid_password).to be_false }
     end
   end
-end
 end
